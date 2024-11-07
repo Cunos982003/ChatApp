@@ -2,6 +2,7 @@ package com.example.easychat.utils;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -13,9 +14,11 @@ import java.util.List;
 
 public class FirebaseUtil {
 
-    public static String currentUserId(){
-        return FirebaseAuth.getInstance().getUid();
+    public static String currentUserId() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return (currentUser != null) ? currentUser.getUid() : null;
     }
+
 
     public static boolean isLoggedIn(){
         if(currentUserId()!=null){
